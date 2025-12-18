@@ -2,7 +2,7 @@
 
 Les animés a test
 
-ADN
+ADN https://animationdigitalnetwork.com/
 
 Ledojomanga https://www.ledojomanga.com/anime/classement
 
@@ -14,5 +14,6 @@ nautiljon https://www.nautiljon.com/
 
 neko sama (bizarre le site) https://www.neko-sama.org/
 
+Anilist https://anilist.co/
 
-My anime list https://myanimelist.net/
+My Anime list https://myanimelist.net/
