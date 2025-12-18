@@ -13,3 +13,6 @@ anime motivation https://fr.animemotivation.com/
 nautiljon https://www.nautiljon.com/
 
 neko sama (bizarre le site) https://www.neko-sama.org/
+
+
+My anime list https://myanimelist.net/
