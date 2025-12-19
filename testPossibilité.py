@@ -53,7 +53,7 @@ def check_scraping_access(url):
 
     return result
 
-url = "https://myanimelist.net"
+url = "https://www.nautiljon.com"
 info = check_scraping_access(url)
 
 for k, v in info.items():
