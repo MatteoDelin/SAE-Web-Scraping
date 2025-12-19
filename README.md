@@ -21,3 +21,6 @@ Classe bande déroulante sur le côté: "leftside"
 
 Classe infos du header "stats-block po-r clearfix" 
 sous cette form: *<div class="fl-l score" data-title="score" data-user="2,104,456 users" title="indicates a weighted score. Please note that 'Not yet aired' titles are excluded."><div class="score-label score-8">8.02</div></div>
+
+Anilist
+class="data"
