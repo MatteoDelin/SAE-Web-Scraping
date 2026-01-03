@@ -22,7 +22,7 @@ def can_scrape(url):
     except Exception:
         return False
 
-def scrape_by_class(url, class_name):
+def scrape_by_class_lien(url, class_name):
     """
     Récupère le contenu de toutes les balises ayant la classe donnée
     """
@@ -39,9 +39,9 @@ def scrape_by_class(url, class_name):
             results.append(text)
     return results
 
-def get_url_mal(n):
-    url = "https://myanimelist.net/topanime.php?limit="
-    class_to_scrape = "hoverinfo_trigger fl-l ml12 mr8"
+def get_url_nautilijon(n):
+    url = "https://www.nautiljon.com/classements/rank/anime/0/"
+    class_to_scrape = "fright"
     ls_url = []
     for i in range(0,n,50):
         ls_url += scrape_by_class(url+str(i), class_to_scrape)
