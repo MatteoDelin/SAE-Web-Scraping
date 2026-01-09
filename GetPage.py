@@ -2,6 +2,7 @@ import requests
 import urllib.robotparser as robotparser
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+from pathlib import Path
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; ResearchBot/1.0)"
@@ -60,8 +61,13 @@ def get_url_mal(n):
         ls_url += scrape_by_class(url+str(i), class_to_scrape, True)
     return ls_url
 
-def get_url_anilist(n):
-    url = "https://anilist.co/search/anime/top-100"
-    class_to_scrape = "title"
-    ls_url += scrape_by_class(url, class_to_scrape, True)
+def get_url_anilist():
+    dossier = Path("donneMAL")
+    ls_url=[]
+    for fichier in dossier.iterdir():
+        url = "https://anilist.co/search/anime?search="+str(fichier.name)[:-4]
+        print(url)
+        class_to_scrape = "title"
+        lien=scrape_by_class(url, class_to_scrape, True)[1]
+        print(lien)
     return ls_url
