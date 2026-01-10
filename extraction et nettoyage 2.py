@@ -1,28 +1,23 @@
 import os
 import csv
 import pandas as pd
+import re
 
-# =========================
-# 📁 CHEMINS
-# =========================
-DOSSIER = r"C:\Users\tmargerand\Downloads"
-CHEMIN_EXCEL = r"C:\Users\tmargerand\Downloads\MAL_dataset.xlsx"
+# DEFINITION DES CHEMINS
+DOSSIER = r"donneMAL"
+CHEMIN_EXCEL = r"MAL_dataset.xlsx"
 
-# =========================
-# 🚫 FILTRES
-# =========================
+# FILTRES
 
-# lignes à supprimer par préfixe (langues)
 LIGNES_A_SUPPRIMER = (
     "Japanese:",
     "German:",
     "Spanish:"
 )
 
-# clés à supprimer STRICTEMENT
 CLES_A_SUPPRIMER = {
-    "Genre",      # on garde "Genres"
-    "Theme",      # on garde "Themes"
+    "Genre",
+    "Theme",
     "Rating",
     "Source",
     "Licensors",
@@ -39,9 +34,8 @@ CLES_A_SUPPRIMER = {
     "Dropped"
 }
 
-# =========================
-# 1️⃣ LECTURE + NETTOYAGE
-# =========================
+
+#LECTURE + NETTOYAGE
 MAL_extraction = []
 
 for filename in sorted(os.listdir(DOSSIER)):
@@ -55,7 +49,6 @@ for filename in sorted(os.listdir(DOSSIER)):
                 valeur = ligne[0]
                 key = valeur.split(":", 1)[0]
 
-                # filtres combinés
                 if not valeur.startswith(LIGNES_A_SUPPRIMER) and key not in CLES_A_SUPPRIMER:
                     fichier_data.append(ligne)
 
@@ -64,9 +57,9 @@ for filename in sorted(os.listdir(DOSSIER)):
 
 print(f"\nTotal fichiers chargés : {len(MAL_extraction)}")
 
-# =========================
-# 2️⃣ CONVERSION EN DICTS
-# =========================
+
+#CONVERSION EN DICTS
+
 def anime_to_dict(anime):
     data = {}
     for champ in anime:
@@ -78,25 +71,76 @@ def anime_to_dict(anime):
 
 anime_dicts = [anime_to_dict(anime) for anime in MAL_extraction]
 
-# =========================
-# 3️⃣ NETTOYAGES SPÉCIFIQUES
-# =========================
+#NETTOYAGES SPÉCIFIQUES
+
+def nettoyer_premiered(texte):
+    if not texte:
+        return None, None
+
+    texte = texte.strip()
+
+    # format attendu : "Fall 2017"
+    match = re.match(r"(Spring|Summer|Fall|Winter)\s+(\d{4})", texte)
+    if match:
+        season, year = match.groups()
+        return season, int(year)
+
+    return None, None
 
 def score_nettoyage(texte):
-    return texte[:5]
+    return float(texte[:4]) if texte[:4].replace(".", "").isdigit() else None
 
 def duree_nettoyage(texte):
-    return texte[:6]
+    if not texte:
+        return None
+
+    texte = texte.lower().strip()
+    if texte in {"unknown", "?"}:
+        return None
+
+    minutes = 0
+
+    # heures (hr ou hr.)
+    h = re.search(r"(\d+)\s*hr\.?", texte)
+    if h:
+        minutes += int(h.group(1)) * 60
+
+    # minutes
+    m = re.search(r"(\d+)\s*min", texte)
+    if m:
+        minutes += int(m.group(1))
+
+    return minutes if minutes > 0 else None
+
 
 def extraire_rang(texte):
-    if "based" in texte:
-        return texte.split("based", 1)[0]
-    return texte
+    return texte.split("based", 1)[0].strip()
 
 def garder_premier_studio(texte):
-    if "," in texte:
-        return texte.split(",", 1)[0].strip()
-    return texte
+    return texte.split(",", 1)[0].strip()
+
+def nettoyer_genres_themes(texte):
+    if not texte:
+        return texte
+
+    elements = texte.split(",")
+    nettoyes = []
+
+    for elem in elements:
+        elem = elem.strip()
+        longueur = len(elem)
+
+        if longueur % 2 == 0:
+            moitie = longueur // 2
+            if elem[:moitie] == elem[moitie:]:
+                elem = elem[:moitie]
+
+        nettoyes.append(elem)
+
+    return ",".join(dict.fromkeys(nettoyes))
+
+
+#APPLICATION DES NETTOYAGES
 
 for anime in anime_dicts:
     if "Score" in anime:
@@ -111,47 +155,36 @@ for anime in anime_dicts:
     if "Studios" in anime:
         anime["Studios"] = garder_premier_studio(anime["Studios"])
 
+    if "Genres" in anime:
+        anime["Genres"] = nettoyer_genres_themes(anime["Genres"])
 
-def nettoyer_genres_themes(texte):
-    if not texte:
-        return texte
-
-    elements = texte.split(",")
-    nettoyes = []
-
-    for elem in elements:
-        elem = elem.strip()
-        longueur = len(elem)
-
-        # supprimer doublon concaténé (DramaDrama → Drama)
-        if longueur % 2 == 0:
-            moitie = longueur // 2
-            if elem[:moitie] == elem[moitie:]:
-                elem = elem[:moitie]
-
-        nettoyes.append(elem)
-
-    # supprimer doublons éventuels tout en gardant l'ordre
-    nettoyes_uniques = list(dict.fromkeys(nettoyes))
-
-    return ",".join(nettoyes_uniques)
-
-
-
-for anime in anime_dicts:
     if "Themes" in anime:
         anime["Themes"] = nettoyer_genres_themes(anime["Themes"])
 
     if "Demographic" in anime:
         anime["Demographic"] = nettoyer_genres_themes(anime["Demographic"])
 
-    if "Genres" in anime:
-        anime["Genres"] = nettoyer_genres_themes(anime["Genres"])
 
-# =========================
-# 4️⃣ EXPORT EXCEL
-# =========================
+    if "Premiered" in anime:
+        season, year = nettoyer_premiered(anime["Premiered"])
+        anime["Season"] = season
+        anime["Year"] = year
+        del anime["Premiered"]
+
+
+#EXPORT EXCEL
+
 df = pd.DataFrame(anime_dicts)
+
+# Traites les colones au format de nombre Americain
+df["Members"] = df['Members'].str.replace(',', '')
+df['Members'] = df['Members'].astype(int)
+df["Favorites"] = df['Favorites'].str.replace(',', '')
+df['Favorites'] = df['Favorites'].astype(int)
+df["Completed"] = df['Completed'].str.replace(',', '')
+df['Completed'] = df['Completed'].astype(int)
+df['Episodes'] = pd.to_numeric(df['Episodes'].replace('Unknown', None), errors='coerce').astype('Int64')
+
 df.to_excel(CHEMIN_EXCEL, index=False)
-print("\n✅ Export Excel terminé")
-print(f"📄 Fichier créé : {CHEMIN_EXCEL}")
+
+print("Export Excel terminé")
