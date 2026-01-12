@@ -8,7 +8,7 @@ LIGNES_A_SUPPRIMER = ("Japanese:", "German:", "Spanish:")
 CLES_A_SUPPRIMER = {
     "Genre", "Theme", "Rating", "Source", "Licensors", "Producers",
     "Broadcast", "Status", "French", "Aired", "Synonyms", "Total",
-    "On-Hold", "Watching", "Plan to Watch", "Dropped"
+    "On-Hold", "Watching", "Plan to Watch", "Dropped","Popularity","Ranked"
 }
 
 # --- FONCTIONS DE NETTOYAGE INDIVIDUELLES ---
