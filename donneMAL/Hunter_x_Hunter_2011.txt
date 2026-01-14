@@ -18,24 +18,24 @@ Genres:ActionAction,AdventureAdventure,FantasyFantasy
 Demographic:ShounenShounen
 Duration:23 min. per ep.
 Rating:PG-13 - Teens 13 or older
-Score:9.031(scored by19339181,933,918 users)1indicates aweighted score.
-Ranked:#922based on thetop animepage. Please note that 'Not yet aired' and 'R18+' titles are excluded.
+Score:9.031(scored by19404701,940,470 users)1indicates aweighted score.
+Ranked:#822based on thetop animepage. Please note that 'Not yet aired' and 'R18+' titles are excluded.
 Popularity:#8
-Members:3,114,860
-Favorites:225,847
-Watching:378,440
-Completed:2,136,113
-On-Hold:149,699
-Dropped:67,654
-Plan to Watch:382,954
-Total:3,114,860
-42.1%(815015 votes)
-30.2%(583826 votes)
-17.1%(331601 votes)
-6.8%(130900 votes)
-2.0%(38455 votes)
-0.8%(16375 votes)
-0.3%(6055 votes)
-0.1%(2557 votes)
-0.1%(1862 votes)
-0.4%(7272 votes)
+Members:3,124,747
+Favorites:226,363
+Watching:379,114
+Completed:2,143,794
+On-Hold:150,066
+Dropped:67,921
+Plan to Watch:383,852
+Total:3,124,747
+42.1%(817586 votes)
+30.2%(585933 votes)
+17.2%(332811 votes)
+6.8%(131372 votes)
+2.0%(38574 votes)
+0.8%(16419 votes)
+0.3%(6067 votes)
+0.1%(2562 votes)
+0.1%(1868 votes)
+0.4%(7279 votes)
