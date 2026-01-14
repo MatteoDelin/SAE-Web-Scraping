@@ -1,8 +1,10 @@
-# MyAnimeList Data Collector & Processor
+# Collecte et Traitement de données MyAnimeList
 
 Ce projet est un outil de **Web Scraping** conçu pour extraire, nettoyer et centraliser des informations détaillées sur les animés depuis le site [MyAnimeList](https://myanimelist.net/).
 
 Les données passent par un processus de transformation (conversion des durées en minutes, gestion des saisons, nettoyage des doublons) avant d'être exportées dans un fichier Excel exploitable pour de l'analyse de données.
+
+Une WebApp interactive est mise à disposition pour visualiser les données selon plusieurs axes (temporels, thématiques, etc.). Elle permet d'explorer les résultats de l'analyse de manière intuitive.
 
 ## 🚀 Fonctionnalités
 
@@ -13,6 +15,7 @@ Les données passent par un processus de transformation (conversion des durées 
     * Suppression des doublons textuels dans les genres et thèmes.
     * Conversion des nombres au format "anglo-saxon" (virgules pour les milliers) en entiers manipulables.
 * **Export :** Génération d'un dataset propre au format `.xlsx`.
+* **Visualisation :** Représentation graphique des données permettant d'illustrer les résultats de manière interactive.
 
 ## 🛠️ Installation (Mise en place chez soi)
 
@@ -33,10 +36,22 @@ git clone https://github.com/votre-compte/sae-vcod-1.git
 Le projet utilise différentes bibliothèques pour le traitement de données et l'affiche :
 
 ```bash
+pip install -r requirements.txt
+```
+OU
+```bash
 pip install pandas
+```
+```bash
 pip install openpyxl
+```
+```bash
 pip install dash
+```
+```bash
 pip install bs4
+```
+```bash
 pip install requests
 ```
 
@@ -82,6 +97,23 @@ Le dataset final inclut les colonnes suivantes :
 *  **Year** : L'année de sortie (format numérique), extraite pour permettre des tris chronologiques.
 *  **Genres** : Catégories de l'œuvre (ex: Action, Sci-Fi) avec suppression des doublons.
 
----
 
-*Ce projet a été réalisé dans le cadre d'un projet Unniversitaire*
+## Répartition du travail
+
+Nous avons réparti les tâches de la manière suivante :
+
+* Partie 1 : Extraction des données
+
+    * Mattéo a développé le code permettant d'extraire les informations depuis les pages web.
+
+    * Timéo s'est chargé de l'analyse de la structure de ces pages.
+
+* Partie 2 : Traitement des données
+
+    * Timéo a traité les données récupérées afin de les regrouper dans un fichier structuré.
+
+* Partie 3 : Visualisation et Analyse
+
+    * Mattéo a sélectionné les graphiques pertinents et a développé la WebApp pour les afficher.
+
+    * Timéo a analysé les résultats obtenus afin de compléter le rapport final.
