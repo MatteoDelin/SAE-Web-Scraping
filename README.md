@@ -111,6 +111,8 @@ Nous avons réparti les tâches de la manière suivante :
 * Partie 2 : Traitement des données
 
     * Timéo a traité les données récupérées afin de les regrouper dans un fichier structuré.
+ 
+    * Mattéo a optimisatier la structure du code par une approche modulaire, permettant une exécution simplifiée et plus flexible.
 
 * Partie 3 : Visualisation et Analyse
 
