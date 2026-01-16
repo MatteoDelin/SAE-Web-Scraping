@@ -64,15 +64,19 @@ pip install requests
 
 ## 🚀 Utilisation
 
-Lancez les scripts de recolte et de traitement dans l'ordre :
+Pour récupérer les données, lancer le script :
 ```bash
 python GetPage.py
+```
+Un message lorsque c'est terminé s'affiche "Scrapping de tous les liens finis, données exportées dans : donneMal"
+
+Pour traiter les données, lancer le script :
+```bash
 python ETL.py
 ```
+Une fois terminé, le message `✔ Export terminé` s'affichera et vous trouverez le fichier **`MAL_dataset.xlsx`** à la racine de votre dossier.
 
-3. Une fois terminé, le message `✔ Export terminé` s'affichera et vous trouverez le fichier **`MAL_dataset.xlsx`** à la racine de votre dossier.
-
-4. Vous pouvez maintenant lancer la WebApp qui permetras de visualiser les graphiques
+Pour afficher les données, lancer le script et ouvir le lien fourni :
 ```bash
 python App.py
 ```
