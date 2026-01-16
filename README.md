@@ -76,7 +76,7 @@ python ETL.py
 ```
 Une fois terminé, le message `✔ Export terminé` s'affichera et vous trouverez le fichier **`MAL_dataset.xlsx`** à la racine de votre dossier.
 
-Pour afficher les données, lancer le script et ouvir le lien fourni :
+Pour afficher les données, lancer le script et ouvir le lien fourni (normalement : http://127.0.0.1:8050/) :
 ```bash
 python App.py
 ```
