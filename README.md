@@ -68,7 +68,7 @@ Pour récupérer les données, lancer le script :
 ```bash
 python GetPage.py
 ```
-Un message lorsque c'est terminé s'affiche "Scrapping de tous les liens finis, données exportées dans : donneMal"
+Un message lorsque c'est terminé s'affiche `Scrapping de tous les liens finis, données exportées dans : donneMal`
 
 Pour traiter les données, lancer le script :
 ```bash
