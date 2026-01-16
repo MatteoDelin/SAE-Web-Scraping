@@ -150,7 +150,7 @@ def anime_to_dict(anime_lines):
 # --- FONCTION PRINCIPALE DE TRAITEMENT ---
 # =====================================================
 
-def process_mal_data(dossier_source=r"donneMAL", chemin_export_excel=r"MAL_dataset.xlsx"):
+def process_mal_data(dossier_source=r"donnees_MAL", chemin_export_excel=r"MAL_dataset.xlsx"):
     """
     - Lit les fichiers .txt extraits de MyAnimeList
     - Nettoie et normalise les données
